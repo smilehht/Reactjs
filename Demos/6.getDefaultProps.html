@@ -11,8 +11,21 @@
     <div id="example"></div>
 </body>
 <script type="text/babel">
-  ReactDOM.render(
+  
+  var HHT=React.createClass({
+    getDefaultProps:function(){
+      return {title:"hello world!"};
+    },
 
+    render:function(){
+      return <h1>{this.props.title}</h1>
+    }
+  })
+
+  ReactDOM.render(
+    
+    <HHT title="Hello" />,
+    document.getElementById("example")
 
 
   );

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+  <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+</body>
+<script type="text/babel">
+
+  var HHT=React.createClass({
+    getInitialState:function(){
+      return {liked:false}
+    },
+
+    onClick:function(event){
+      this.setState({liked: !this.state.liked});
+    },
+
+    render: function(){
+
+      var text=this.state.liked ? "like":"haven\'t like";
+
+      return (
+          <p onClick={this.onClick}>
+            You {text} this. Click to toggle.
+          </p>
+      );
+    }
+  });
+
+  ReactDOM.render(
+
+  <HHT />,
+  document.getElementById("example")
+
+  );
+</script>
+</html>

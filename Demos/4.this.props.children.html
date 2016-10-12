@@ -14,18 +14,18 @@
   
   var NodeList=React.createClass({
 
-  render:function(){
+  render: function(){
 
     return (
     
       <ol>
-        
-        React.Children.map(this.props.children, function(child){
+        {
+          React.Children.map(this.props.children, function(child){
 
-          return <li>{child}</li>
+            return <li>{child}</li>;
 
-        });
-
+          })
+        }
       </ol>
 
     );
@@ -41,7 +41,7 @@
       <span>HTML</span>
       <span>Javascript</span>
       <span>CSS</span>
-      <span>后台</span>
+      <span>后台<p>Java</p></span>
     </NodeList>,
 
     document.getElementById("example")
