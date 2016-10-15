@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello React!</title>
+    <script src="../build/react.js"></script>
+    <script src="../build/react-dom.js"></script>
+  <script src="../build/browser.min.js"></script>
+  </head>
+  <body>
+    <div id="example"></div>
+</body>
+<script type="text/babel">
+
+var HHT=React.createClass({
+	render:function(){
+
+		return (
+		<div>
+			<p>我这里有一个嵌套组件</p>
+			<HZR></HZR>
+		</div>);
+	}
+})
+
+var HZR=React.createClass({
+	render:function(){
+
+	 return (<div>
+			你知道我在那儿么？我嵌套在HHT组件里面，嘻嘻！
+			</div>);
+	}
+});
+
+ReactDOM.render(
+
+	<HHT></HHT>,
+	document.getElementById("example")
+
+);
+</script>
+</html>
