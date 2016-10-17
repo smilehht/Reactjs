@@ -3,8 +3,77 @@
 <head>
 	<meta charset="UTF-8">
 	<title>commentBox</title>
+    <script src="../../build/react.js"></script>
+    <script src="../../build/react-dom.js"></script>
+  	<script src="../../build/browser.min.js"></script>
+  	<style>
+  		.commentBox{
+  			width:710px;
+  			/*height:700px;*/
+  			border:3px solid #51A7F9;
+  			margin:50px auto;
+  			padding:20px;
+  		}
+  		.comment-title{
+  			border-bottom:#000 2px solid;
+  		}
+  	</style>
 </head>
 <body>
-	
+	<div id="commentBox"></div>
 </body>
+<script type="text/babel">
+
+	var data = [
+		  {id: 1, author: "Pete Hunt", text: "This is one comment"},
+		  {id: 2, author: "Jordan Walke", text: "This is *another* comment"}
+		];
+
+	var CommentBox=React.createClass({
+		render:function(){
+			return (
+				<div className="commentBox">
+					<h1 className="comment-title">Comments</h1>
+					<CommentList className="commentList" data={this.props.data}/>
+					<CommentForm className="commentForm" />
+				</div>
+				);
+		}
+	});
+
+	var CommentList=React.createClass({
+
+		render:function(){
+
+			return (
+				<div>
+					<h3>{this.props.data[0]["author"]}</h3>
+					<p>{this.props.data[0]["text"]}</p>
+				</div>
+			);
+		}
+	});
+
+	var CommentForm=React.createClass({
+
+		render:function(){
+
+			return (
+				
+				<div>
+					<textarea name="text" id="" cols="30" rows="10"></textarea>
+					<br />
+					<button>Send</button>
+				</div>
+			);
+		}
+	});
+	
+
+	ReactDOM.render(
+
+		<CommentBox data={data}/>,
+		document.getElementById("commentBox")
+	);
+</script>
 </html>
