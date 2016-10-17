@@ -47,8 +47,14 @@
 
 			return (
 				<div>
-					<h3>{this.props.data[0]["author"]}</h3>
-					<p>{this.props.data[0]["text"]}</p>
+				{
+					this.props.data.map(function(author,text){
+					<div>
+						<h3>{author}</h3>
+						<p>{text}</p>
+					</div>
+					})
+				}
 				</div>
 			);
 		}
