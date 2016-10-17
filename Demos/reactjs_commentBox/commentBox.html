@@ -7,15 +7,69 @@
     <script src="../../build/react-dom.js"></script>
   	<script src="../../build/browser.min.js"></script>
   	<style>
+  		*{
+  			margin:0;
+  			padding:0;
+  		}
+  		body{
+  			font-family: Microsoft YaHei;
+  		}
   		.commentBox{
   			width:710px;
   			/*height:700px;*/
   			border:3px solid #51A7F9;
   			margin:50px auto;
   			padding:20px;
+  			overflow: hidden;
   		}
   		.comment-title{
-  			border-bottom:#000 2px solid;
+  			border-bottom:#6FC040 2px solid;
+  		}
+  		.commentItem{
+  			border:1px dotted #F39019;
+  			margin:10px 0;
+  			padding:10px;
+  		}
+  		.item-info{
+  			display: inline-block;
+  			margin-left:10px;
+  		}
+  		.item-img{
+  			width:50px;
+  			height:50px;
+  			border:1px solid #DDDEE0;
+  		}
+  		.item-author{
+  			color:#0265C0;
+  			line-height: 36px;
+  			font-weight:bold;
+  		}
+  		.item-reply{
+  			float:right;
+  			width:60px;
+  			height:30px;
+  			text-align:center;
+  			line-height:30px;
+  			margin: 20px 10px;
+  			/*border:1px solid #6FC040;*/
+  			background:#6FC040;
+  			color:#fff;
+  		}
+  		.form-input{
+  			width:710px;
+  			height:200px;
+  			resize: none;
+  		}
+  		.form-botton{
+  			float:right;
+			margin-right:10px;
+  			width:60px;
+  			height:30px;
+  			text-align:center;
+  			line-height:30px;
+  			background:#6FC040;
+  			border:none;
+  			color:#fff;
   		}
   	</style>
 </head>
@@ -25,8 +79,9 @@
 <script type="text/babel">
 
 	var data = [
-		  {id: 1, author: "Pete Hunt", text: "This is one comment"},
-		  {id: 2, author: "Jordan Walke", text: "This is *another* comment"}
+		  {id: 1, author: "Hunt", text: "This is one comment",img:"img/baidu.jpg"},
+		  {id: 2, author: "Jordan", text: "This is another comment",img:"img/google.jpg"},
+		  {id: 3, author: "Pete ", text: "Long comment, the more is ignore, this comment is too long",img:"img/huohu.jpg"}
 		];
 
 	var CommentBox=React.createClass({
@@ -44,17 +99,33 @@
 	var CommentList=React.createClass({
 
 		render:function(){
+			var commentNodes=this.props.data.map(function(comment){
+				return (
+					<Comment author={comment.author} key={comment.id} text={comment.text.length>32? comment.text.substring(0,32)+" ...":comment.text} img={comment.img}>
+					</Comment>
+				);
+			});
 
 			return (
-				<div>
-				{
-					this.props.data.map(function(author,text){
-					<div>
-						<h3>{author}</h3>
-						<p>{text}</p>
+						<div>
+							{commentNodes}
+						</div>
+				);
+		}
+	});
+
+	var Comment=React.createClass({
+
+		render:function(){
+
+			return (
+				<div className="commentItem">
+					<img className="item-img" src={this.props.img} alt="" />
+					<div className="item-info">
+						<h3 className="item-author">{this.props.author}</h3>
+						<p>{this.props.text}</p>
 					</div>
-					})
-				}
+					<a href="#"><div className="item-reply">Reply</div></a>
 				</div>
 			);
 		}
@@ -67,9 +138,9 @@
 			return (
 				
 				<div>
-					<textarea name="text" id="" cols="30" rows="10"></textarea>
+					<textarea name="text" className="form-input"></textarea>
 					<br />
-					<button>Send</button>
+					<button className="form-botton">Send</button>
 				</div>
 			);
 		}
