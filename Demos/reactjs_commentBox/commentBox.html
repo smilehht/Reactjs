@@ -76,20 +76,51 @@
 <body>
 	<div id="commentBox"></div>
 </body>
+<script src="../../jquery/jquery-1.12.1.min.js">
+  // var data = [
+  //     {id: 1, author: "Hunter", text: "This is one comment",img:"img/baidu.jpg"},
+  //     {id: 2, author: "HHT", text: "This is another comment",img:"img/google.jpg"},
+  //     {id: 3, author: "Peter", text: "Long comment, the more is ignore, this comment is too long",img:"img/huohu.jpg"}
+  //   ]; 
+      
+    </script>
 <script type="text/babel">
 
-	var data = [
-		  {id: 1, author: "Hunter", text: "This is one comment",img:"img/baidu.jpg"},
-		  {id: 2, author: "HHT", text: "This is another comment",img:"img/google.jpg"},
-		  {id: 3, author: "Peter", text: "Long comment, the more is ignore, this comment is too long",img:"img/huohu.jpg"}
-		];
+
 
 	var CommentBox=React.createClass({
+
+    getInitialState:function(){
+      return {data:[] };
+    },
+
+    componentDidMount: function(){
+      console.log(this.props.url);
+      var loc=this.props.url;
+      $.ajax({
+        
+        url: loc,
+        dataType:'json',
+        cache:false,
+        success:function(data){
+          console.log(data);
+          this.setState({data:data});
+        }.bind(this),
+        error:function(xhr,status,err){
+
+          console.log("failed");
+          console.error(loc,status,err.toString());
+        }.bind(this)
+
+      });
+
+    },
+
 		render:function(){
 			return (
 				<div className="commentBox">
 					<h1 className="comment-title">Comments</h1>
-					<CommentList className="commentList" data={this.props.data}/>
+					<CommentList className="commentList" data={this.state.data}/>
 					<CommentForm className="commentForm" />
 				</div>
 				);
@@ -149,7 +180,7 @@
 
 	ReactDOM.render(
 
-		<CommentBox data={data}/>,
+		<CommentBox url="comments.php" />,
 		document.getElementById("commentBox")
 	);
 </script>
