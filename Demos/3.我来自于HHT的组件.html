@@ -10,21 +10,21 @@
   <body>
     <div id="example"></div>
   </body>
-    <script type="text/babel">
-	
-		var HHT=React.createClass({
+<script type="text/babel">
 
-		render: function(){
-			return <h1>我叫{this.props.name},我来自于HHT的组件！您来自哪呢？</h1>
-		}
-		});
+var HHT=React.createClass({
 
-      ReactDOM.render(
-		
+	render: function(){
+		return <h1>我叫{this.props.name},我来自于HHT的组件！您来自哪呢？</h1>
+	}
+  
+});
+
+  ReactDOM.render(
+
 		<HHT name="hht"/>,
 		document.getElementById("example")
 
-
-      );
-    </script>
+  );
+</script>
 </html>

@@ -20,11 +20,23 @@
     render:function(){
       return <h1>{this.props.title}</h1>
     }
-  })
+  });  
+
+  var Hzr=React.createClass({
+    getDefaultProps:function(){
+      return {title:"hello world! 123"};
+    },
+
+    render:function(){
+      return <h1>{this.props.title}</h1>
+    }
+  });
 
   ReactDOM.render(
     
-    <HHT title="Hello" />,
+    <HHT>
+      <Hzr  />
+    </HHT>,
     document.getElementById("example")
 
 
