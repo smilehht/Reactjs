@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="../../../build/react.js"></script>
+    <script src="../../../build/react-dom.js"></script>
+  	<script src="../../../build/browser.min.js"></script>
+</head>
+<body>
+	<div id="search"></div>
+</body>
+<script type="text/babel">
+
+	var SearchBox=React.createClass({
+
+		render:function(){
+			return (
+				<div>
+					<Search></Search>
+					<Results></Results>
+				</div>
+					);
+		}
+	});
+
+	var Search=React.createClass({
+		render:function(){
+			return (
+				<div>
+					<input type="text" placeholder="Search..." name="key" />
+					<input type="checkbox" />Only show products in stock
+				</div>
+			);
+		}
+	});
+
+	var Results=React.createClass({
+		render:function(){
+			return (
+				<table>
+					<thead><tr><th>Name</th><th>Price</th></tr></thead>
+					<tbody><tr><td>ssss</td><td>ssss</td></tr></tbody>
+				</table>
+			);
+		}
+	});
+
+
+
+	//组件的入口
+	ReactDOM.render(
+		<SearchBox></SearchBox>,
+		document.getElementById("search")
+	);
+</script>
+</html>
