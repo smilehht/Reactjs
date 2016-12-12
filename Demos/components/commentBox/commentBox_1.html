@@ -56,14 +56,13 @@
   			color:#fff;
   		}
   		.form-input{
-  			width:710px;
+  			width:708px;
   			height:200px;
   			resize: none;
-        margin-top:10px;
   		}
   		.form-botton{
   			float:right;
-			  margin-right:10px;
+			margin-right:10px;
   			width:60px;
   			height:30px;
   			text-align:center;
@@ -88,7 +87,7 @@
 <script type="text/babel">
 
 
-
+  //组件1：CommentBox组件，父级组件
 	var CommentBox=React.createClass({
 
     getInitialState:function(){
@@ -127,11 +126,12 @@
 				);
 		}
 	});
-
+  
+  //组件2：CommentList，评论列表组件
 	var CommentList=React.createClass({
 
 		render:function(){
-			var commentNodes=this.props.data.map(function(comment){
+			var  =this.props.data.map(function(comment){
 				return (
 					<Comment author={comment.author} key={comment.id} text={comment.text.length>32? comment.text.substring(0,32)+" ...":comment.text} img={comment.img}>
 					</Comment>
@@ -145,7 +145,8 @@
 				);
 		}
 	});
-
+  
+  //组件3：
 	var Comment=React.createClass({
 
 		render:function(){
@@ -162,18 +163,26 @@
 			);
 		}
 	});
-
+  
+  //组件4：输入评论组件
 	var CommentForm=React.createClass({
 
 		render:function(){
 
 			return (
 				
-				<div>
-					<textarea name="text" className="form-input"></textarea>
-					<br />
-					<button className="form-botton">Send</button>
-				</div>
+				<form>
+					<p className="">
+						<label htmlFor="name">name:</label>
+						<input type="text" name="author" placeholder="your name" />
+						<label htmlFor="img">img:</label>
+						<input type="text" placeholder="img" />
+					</p>
+					<p>
+						<input type="text" placeholder="say something . . ." className="form-input" />
+					</p>
+					<input type="button" value="Send" className="form-botton" />
+				</form>
 			);
 		}
 	});

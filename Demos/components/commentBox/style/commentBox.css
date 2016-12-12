@@ -1,0 +1,77 @@
+*{
+	margin:0;
+	padding:0;
+}
+body{
+	font-family: Microsoft YaHei;
+}
+.commentBox{
+	width:710px;
+	/*height:700px;*/
+	border:3px solid #51A7F9;
+	margin:50px auto;
+	padding:20px;
+	overflow: hidden;
+}
+.comment-title{
+	border-bottom:#6FC040 2px solid;
+}
+.commentItem{
+	border:1px dotted #F39019;
+	margin:10px 0;
+	padding:10px;
+}
+.item-info{
+	display: inline-block;
+	margin-left:10px;
+}
+.item-img{
+	width:50px;
+	height:50px;
+	border:1px solid #DDDEE0;
+}
+.item-author{
+	color:#0265C0;
+	line-height: 36px;
+	font-weight:bold;
+}
+.item-reply{
+	float:right;
+	width:60px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	margin: 20px 10px;
+	/*border:1px solid #6FC040;*/
+	background:#6FC040;
+	color:#fff;
+}
+.form-input{
+	width:708px;
+	height:200px;
+	resize: none;
+	line-height:30px;
+	font-size:18px;
+	font-weight:bold;
+}
+.form-botton{
+	float:right;
+	margin-right:10px;
+	margin-top:10px;
+	width:60px;
+	height:30px;
+	text-align:center;
+	line-height:30px;
+	background:#6FC040;
+	border:none;
+	color:#fff;
+}
+::-webkit-input-placeholder {
+	color:red !important;
+}
+.inputLine{
+	margin:10px auto;
+}
+.form{
+	margin-right:20px;
+}

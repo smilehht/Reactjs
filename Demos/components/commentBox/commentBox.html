@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>commentBox</title>
+	<link rel="stylesheet" href="style/commentBox.css">
+    <script src="../../../build/react.js"></script>
+    <script src="../../../build/react-dom.js"></script>
+  	<script src="../../../build/browser.min.js"></script>
+</head>
+<body>
+	<div id="commentBox"></div>
+</body>
+<script src="../../../jquery/jquery-1.12.1.min.js">
+  // var data = [
+  //     {id: 1, author: "Hunter", text: "This is one comment",img:"img/baidu.jpg"},
+  //     {id: 2, author: "HHT", text: "This is another comment",img:"img/google.jpg"},
+  //     {id: 3, author: "Peter", text: "Long comment, the more is ignore, this comment is too long",img:"img/huohu.jpg"}
+  //   ]; 
+      
+    </script>
+<script type="text/babel">
+
+
+
+	var CommentBox=React.createClass({
+
+	    getInitialState:function(){
+	      return {data:[] };
+	    },
+
+	    componentDidMount: function(){
+	      console.log(this.props.url);
+	      var loc=this.props.url;
+	      $.ajax({
+	        
+		        url: loc,
+		        dataType:'json',
+		        cache:false,
+		        success:function(data){
+		          console.log(data);
+		          this.setState({data:data});
+		        }.bind(this),
+		        error:function(xhr,status,err){
+
+		          console.log("failed");
+		          console.error(loc,status,err.toString());
+		        }.bind(this)
+	      });
+	    },
+
+	    handleCommentSubmit:function(comment){
+			console.log(this);
+			 $.ajax({
+	        
+		        url: this.props.url,
+		        dataType:'json',
+		        type:"POST",
+		        data:comment,
+		        cache:false,
+		        success:function(data){
+		          console.log(data);
+		          this.setState({data:data});
+		        }.bind(this),
+		        error:function(xhr,status,err){
+
+		          console.log("failed");
+		          console.error(loc,status,err.toString());
+		        }.bind(this)
+	      });
+	    },
+
+		render:function(){
+		var a=<div className="commentBox">
+					<h1 className="comment-title">Comments</h1>
+					<CommentList className="commentList" data={this.state.data}/>
+					<CommentForm className="commentForm" onCommentSubmit={this.handleCommentSubmit}/>
+				</div>
+			return (
+				a
+				);
+		}
+	});
+
+	var CommentList=React.createClass({
+
+		render:function(){
+			var commentNodes=this.props.data.map(function(comment){
+				return (
+					<Comment author={comment.author} key={comment.id} text={comment.text.length>32? comment.text.substring(0,32)+" ...":comment.text} img={comment.img}>
+					</Comment>
+				);
+			});
+
+			return (
+						<div>
+							{commentNodes}
+						</div>
+				);
+		}
+	});
+
+	var Comment=React.createClass({
+
+		render:function(){
+
+			return (
+				<div className="commentItem">
+					<img className="item-img" src={this.props.img} alt="" />
+					<div className="item-info">
+						<h3 className="item-author">{this.props.author}</h3>
+						<p>{this.props.text}</p>
+					</div>
+					<a href="#"><div className="item-reply">Reply</div></a>
+				</div>
+			);
+		}
+	});
+
+	var CommentForm=React.createClass({
+
+		getInitialState:function(){
+			return {author:"hht",text:"123",comment:"say something a lot!"};
+		},
+		handleAuthorChange:function(e){
+			this.setState({author:e.target.value});
+		},
+		handleTextChange:function(e){
+			this.setState({text:e.target.value});
+		},
+		handleCommentChange:function(e){
+			this.setState({comment:e.target.value});
+		},
+		handleSubmit:function(e){
+			e.preventDefault();
+			console.log(123);
+			var author=this.state.author.trim();
+			var text = this.state.text.trim();
+			
+			this.props.onCommentSubmit({author:author,text:text});
+			this.setState({author:"",text:""});
+		},
+		render:function(){
+
+			return (
+				
+				<form method="post">
+					<p className="inputLine">
+						<label htmlFor="name">name：</label>
+						<input type="text" name="author" placeholder="your name" className="form"  onChange= {this.handleCommentChange}/>
+						<label htmlFor="img">img：</label>
+						<input type="text" name="imgText" placeholder="img" value={this.state.text} onChange={this.handleTextChange} />
+					</p>
+					<p>
+						<textarea name="comment"  placeholder="say something . . ." className="form-input" value={this.state.comment} onChange={this.handleCommentChange}></textarea>
+					</p>
+					<input type="submit" value="Send" className="form-botton" onClick={this.handleSubmit} />
+				</form>
+			);
+		}
+	});
+	
+
+	ReactDOM.render(
+
+		<CommentBox url="comments.php" />,
+		document.getElementById("commentBox")
+	);
+</script>
+</html>
