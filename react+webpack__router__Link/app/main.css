@@ -1,0 +1,17 @@
+.parent{
+	border:3px solid blue;
+	color:red;
+}
+
+.child1{
+	color:green;
+	font-size:30px;
+	margin:20px;
+	border:red 1px solid;
+}
+
+.child2{
+	color:blue;
+	margin:10px;
+	border:#000 1px solid;
+}
