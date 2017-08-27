@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start_es6": "webpack --config webpack.es6.config.js",
-    "build": "webpack-dev-server --port 3000 --hot --inline",
+    "start": "webpack-dev-server --port 3000 --hot --inline",
     "build_es6": "webpack-dev-server --port 3000 --hot --inline --config webpack.es6.config.js"
   },
   "author": "",
